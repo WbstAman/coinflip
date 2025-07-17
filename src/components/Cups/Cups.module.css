@@ -1,0 +1,358 @@
+.instructions {
+  font-family: Avenir, sans-serif;
+  color: #ffc60a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-top: 10px;
+}
+
+.playAgainButton {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 90px;
+  font-family: Avenir, sans-serif;
+  z-index: 99;
+  margin-top: 1rem;
+  background: #ffbf81;
+  cursor: pointer;
+  box-shadow: 0 3px 8px 0 rgb(129 94 94 / 44%), 0 1px 4px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+.won {
+  background: #67ab00;
+  box-shadow: inset 0 0 10px #29ff43b3;
+}
+.loss {
+  background: #e12222;
+  box-shadow: inset 0 0 10px #f8a000b3;
+}
+
+.appContainer {
+  /* display: flex; */
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* width: 100%; */
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+.title {
+  font-family: Avenir, sans-serif;
+  font-size: 2.5rem;
+  /* position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%); */
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  color: #ffc60a;
+  margin-top: 50px;
+}
+.cupBox {
+  position: relative;
+  margin: 30px;
+}
+
+.ball {
+  width: 70px;
+  height: 70px;
+  background-image: url("/assets/images/SPINNY.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* border-radius: 50%; */
+  /* background: #e12222; */
+  position: absolute;
+  bottom: 9px;
+  left: 33%;
+  z-index: 1;
+  /* box-shadow: inset 0 0 10px #f8a000b3; */
+}
+
+/* .ball::before {
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  background: rgb(255 255 255 / 63%);
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 6px;
+  z-index: 3;
+  border-radius: 50%;
+} */
+
+.cupArea {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  /* margin: 6rem auto; */
+  margin:auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.cup.noTransition,
+.cupShadow.noTransition {
+  transform: none !important;
+}
+
+.cup {
+  cursor: pointer;
+  width: 180px;
+  height: 180px;
+  background-image: url("/assets/images/cup_game.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.cupShadow {
+  width: 140px;
+  height: 46px;
+  border-radius: 50%;
+  position: absolute;
+  top: 80%;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.loseText {
+  font-size: 1.8rem;
+  color: red;
+  margin: 0;
+  font-weight: 700;
+  animation: horizontal-shaking 0.3s ease-in-out forwards;
+}
+
+.buttonArea {
+  z-index: 99;
+}
+
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+    transform-origin: 50% 50%;
+    transform: rotate(15deg) scale(6);
+    transition: all 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cup {
+    height: 130px;
+    width: 120px;
+  }
+  .cupShadow {
+    width: 104px;
+    height: 36px;
+    top: 77%;
+    left: 6px;
+  }
+  .ball {
+    width: 55px;
+    height: 55px;
+    left: 23%;
+  }
+  /* .ball::before {
+    width: 5px;
+    height: 5px;
+    top: 5px;
+    right: 5px;
+  } */
+}
+
+@media screen and (max-width: 600px) {
+  .cup {
+    height: 110px;
+    width: 90px;
+  }
+  .cupShadow {
+    width: 84px;
+    height: 32px;
+    top: 77%;
+    left: 3px;
+  }
+  .ball {
+    width: 50px;
+    height: 50px;
+    left: 14%;
+    bottom: 3px;
+  }
+}
+
+@media screen and (max-width: 522px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .cupBox {
+    margin: 10px;
+  }
+  .cup {
+    height: 100px;
+    width: 100px;
+  }
+  .cupShadow {
+    width: 82px;
+    height: 29px;
+    top: 75%;
+    left: 8px;
+  }
+  .ball {
+    width: 45px;
+    height: 45px;
+    left: 20%;
+    bottom: 6px;
+  }
+  /* .ball::before {
+    top: 4px;
+    right: 4px;
+  } */
+}
+
+@media screen and (max-width: 376px) {
+  .cup {
+    height: 90px;
+    width: 85px;
+  }
+  .cupShadow {
+    width: 69px;
+    height: 26px;
+    top: 75%;
+    left: 7px;
+  }
+  .ball {
+    width: 40px;
+    height: 40px;
+    left: 18%;
+    bottom: 4px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .title {
+    top: 3%;
+    font-size: 1.5rem;
+  }
+  .cup {
+    height: 100px;
+    width: 120px;
+  }
+  .cupShadow {
+    width: 84px;
+    height: 27px;
+    top: 78%;
+    left: 16px;
+  }
+  .cupArea {
+    margin: 2rem auto;
+  }
+  .ball {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-height: 900px) and (max-height: 700px) {
+  .cupShadow {
+    width: 79px;
+    height: 28px;
+    top: 76%;
+    left: 5px;
+  }
+}
+
+@media screen and (max-width: 500px) and (max-height: 700px) {
+  .title {
+    top: 3%;
+    font-size: 1.5rem;
+  }
+  .cup {
+    height: 100px;
+    width: 120px;
+  }
+  .cupShadow {
+    width: 82px;
+    height: 27px;
+    top: 77%;
+    left: 3px;
+  }
+  .cupArea {
+    margin: 2rem auto;
+  }
+  .ball {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 1300px) and (max-height: 700px) {
+  .appContainer {
+    justify-content: space-around;
+  }
+  .title {
+    position: relative;
+    transform: none;
+    left: 0;
+  }
+  .cup {
+    height: 100px;
+    width: 90px;
+  }
+  .cupArea {
+    margin: 1rem auto;
+  }
+  .loseText {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .playAgainButton {
+    padding: 0.3rem 0.8rem;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .ball {
+    width: 45px;
+    height: 45px;
+    bottom: 5px;
+    left: 18%;
+  }
+  /* .ball::before {
+    top: 6px;
+    right: 5px;
+    width: 6px;
+    height: 6px;
+  } */
+}

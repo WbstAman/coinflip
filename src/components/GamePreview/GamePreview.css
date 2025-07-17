@@ -1,0 +1,191 @@
+/* .gamePreviewBg {
+  background: url(../../../../assets/images/coinflipBg.jpg);
+  background-size: cover;  
+  background-position: center center;
+  background-repeat: no-repeat;  
+} */
+
+
+.goldCoinfigure {
+  /* background: url(../../assets/Images/HEADS.png) center center / 100% 100% */
+  background: url(../../assets/Images/goldCoin1.webp) center center / 100% 100%
+    no-repeat;
+  transform: translateZ(1px) rotateY(0deg);
+}
+
+.silverCoinfigure {
+  /* background: url(../../assets/Images/TAILS.png) center center / 100% 100% */
+  background: url(../../assets/Images/silverCoin1.webp) center center / 100% 100%
+    no-repeat;
+  transform: translateZ(1px) rotateY(180deg);
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.coinOuter {
+  transform-style: preserve-3d;
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.goldCoinfigure,
+.silverCoin {
+  backface-visibility: hidden;
+    /* width: 300px;
+    height: 300px; */
+    width: 100%;
+    height: 100%;
+}
+
+
+.gamePreviewBg {
+background: url(/src/assets/images/coinflipBg.jpg);
+    background-size: 120% 110%;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+
+@media(max-width:767px){
+  .gamePreviewBg {
+    background-size:100% 115%;
+}
+}
+
+@media(max-width:640px){
+  .gamePreviewBg {
+    background-size:190% 130%;
+}
+}
+
+/* ///////////////////////////////// */
+
+.gameContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ 
+.coinOuter {
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease-in-out;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  cursor: pointer;
+}
+
+.goldCoinfigure,
+.silverCoinfigure {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.goldCoinfigure {
+  background: url("/assets/images/head.webp") center center / cover no-repeat;
+}
+
+.silverCoinfigure {
+  background: url("/assets/images/tail.webp") center center / cover no-repeat;
+  transform: rotateY(180deg);
+}
+
+.gamePreviewBg {
+  background: url("/assets/images/coinflipBg.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Optional responsive tweaks */
+@media (max-width: 767px) {
+  .gamePreviewBg {
+    background-size: 100% 115%;
+  }
+}
+
+@media (max-width: 640px) {
+  .gamePreviewBg {
+    background-size: 190% 130%;
+  }
+}
+
+
+
+/* ////////////////////////////////////////////// */
+
+.ryu {
+   background-image: url("../../assets//Images/head.webp");   
+   background-size: 960% 1170%;
+    position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  height: 300px;
+  background-position: 0 0;
+  animation: play 2s steps(106) infinite;
+
+}
+
+  @keyframes play {
+  0% { background-position: 0 0; }
+  100% { background-position: 480px 0; }
+}
+
+
+
+.catSprite {
+  width: 200px;
+  height: 200px;
+  display: block;
+  right: 0;
+  left: auto;
+  top: auto;
+  /* bottom: -2%; */
+  animation: catSprint 1.5s linear infinite;
+}
+
+ 
+
+/* Only one selected sprite is shown */
+#s1:checked ~ .sprites .sprite:nth-child(1) {
+  display: block;
+}
+
+@keyframes catSprint {
+  0% {
+    right: 0;
+    transform: translateX(100%);
+  }
+  70%, 100% {
+    right: 100%;
+    transform: none;
+  }
+}
+
+
+@keyframes catSpriteAnim {
+  0% { top: 0px; }
+  7.69% { top: -199px; }
+  15.38% { top: -398px; }
+  23.07% { top: -597px; }
+  30.76% { top: -796px; }
+  38.45% { top: -995px; }
+  46.14% { top: -1194px; }
+  53.83% { top: -1393px; }
+  61.52% { top: -1592px; }
+  69.21% { top: -1791px; }
+  76.90% { top: -1990px; }
+  84.59% { top: -2189px; }
+  92.28% { top: -2388px; }
+  100% { top: -2587px; }
+}

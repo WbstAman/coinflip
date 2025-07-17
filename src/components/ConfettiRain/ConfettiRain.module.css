@@ -1,0 +1,22 @@
+.confetti1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* .confetti2 {
+    position: absolute;
+    right: 62%;
+    top: 0;
+  }
+  .confetti3 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  .confetti4 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  } */
