@@ -4,19 +4,17 @@ import React, { useState, useEffect, useRef } from "react";
 import headSprite from "../../assets/Images/head.webp";
 import tailSprite from "../../assets/Images/tail.webp";
 import "./coinflip.css";
-import { pre } from "framer-motion/client";
 
-// Update: Added missing `triggerGame` to props
+// 🔧 SpriteProps uses required types now
 interface SpriteProps {
   sprite: string;
-  setState?: (state: "waiting" | "flip-animation" | "winner" ) => void;
+  setState: (state: "waiting" | "flip-animation" | "winner") => void;
   setIsWin: (state: true | false | null) => void;
   randomCoin: "head" | "tail";
-  state:"waiting" | "flip-animation" | "winner"
- }
+  state: "waiting" | "flip-animation" | "winner";
+}
 
-const Sprite: React.FC<SpriteProps> = ({ sprite, setState ,state,randomCoin,setIsWin}) => {
-
+const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, setIsWin }) => {
   const [frame, setFrame] = useState<number>(0);
 
   const totalCols = 10;
@@ -30,11 +28,12 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState ,state,randomCoin,setI
   const startAnimation = () => {
     if (intervalRef.current) return;
 
-     if(  randomCoin === "head" ) {
-        setState('winner');
-         setIsWin(true)
-    } else{
-        setIsWin(false)
+    // ✅ Use setState safely now that it's required
+    if (randomCoin === "head") {
+      setState("winner");
+      setIsWin(true);
+    } else {
+      setIsWin(false);
     }
 
     setFrame(0);
@@ -44,29 +43,20 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState ,state,randomCoin,setI
         if (prev + 1 >= totalFrames) {
           clearInterval(intervalRef.current!);
           intervalRef.current = null;
-
-        //   if (setState) {
-        //     setTimeout(() => {
-        //       setState("winner");
-        //     }, 400);
-        //   }
-
-        // return prev
-          return 0; // Reset frame to start
+          return 0; // Reset frame
         }
         return prev + 1;
       });
-    }, 50); // 50ms per frame
+    }, 50);
   };
 
   const x = -(frame % totalCols) * frameWidth;
   const y = -Math.floor(frame / totalCols) * frameHeight;
 
   useEffect(() => {
-    if(state=='waiting') return 
- 
-      startAnimation();
-   
+    if (state === "waiting") return;
+    startAnimation();
+
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -74,7 +64,7 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState ,state,randomCoin,setI
       }
     };
   }, [state]);
- 
+
   return (
     <div
       className="sprite"
@@ -83,9 +73,7 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState ,state,randomCoin,setI
         height: `${frameHeight}px`,
         backgroundImage: `url(${sprite})`,
         backgroundPosition: `${x}px ${y}px`,
-        backgroundSize: `${frameWidth * totalCols}px ${
-          frameHeight * totalRows
-        }px`,
+        backgroundSize: `${frameWidth * totalCols}px ${frameHeight * totalRows}px`,
       }}
     />
   );
@@ -94,22 +82,22 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState ,state,randomCoin,setI
 interface CoinflipProps {
   setState: (state: "waiting" | "flip-animation" | "winner") => void;
   setIsWin: (state: true | false | null) => void;
-  randomCoin: "head" | "tail" ;
-  state:"waiting" | "flip-animation" | "winner"
+  randomCoin: "head" | "tail";
+  state: "waiting" | "flip-animation" | "winner";
 }
 
-const Coinflip: React.FC<CoinflipProps> = ({state, setState, randomCoin,setIsWin}) => {
+const Coinflip: React.FC<CoinflipProps> = ({ state, setState, randomCoin, setIsWin }) => {
   const spriteImage = randomCoin === "head" ? headSprite.src : tailSprite.src;
- 
+
   return (
-    <div className="main-wrapper" onClick={()=>setState('flip-animation')}>
+    <div className="main-wrapper" onClick={() => setState("flip-animation")}>
       <Sprite
         sprite={spriteImage}
         setState={setState}
         state={state}
-        randomCoin={randomCoin}      
-        setIsWin={setIsWin}  
-       />
+        randomCoin={randomCoin}
+        setIsWin={setIsWin}
+      />
     </div>
   );
 };

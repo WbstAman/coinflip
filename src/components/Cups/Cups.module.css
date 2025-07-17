@@ -30,27 +30,26 @@
 }
 
 .appContainer {
-  /* display: flex; */
-  flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* width: 100%; */
-  height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 .title {
   font-family: Avenir, sans-serif;
   font-size: 2.5rem;
-  /* position: absolute;
+  position: absolute;
   top: 8%;
   left: 50%;
-  transform: translateX(-50%); */
+  transform: translateX(-50%);
   text-align: center;
   z-index: 10;
   width: 100%;
   color: #ffc60a;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 .cupBox {
   position: relative;

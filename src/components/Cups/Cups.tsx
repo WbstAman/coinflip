@@ -3,7 +3,6 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { animationVariant, pickRandom, shuffle } from "../helpers/utils";
 import Cup from "./Cup";
 import ResultArea from "./ResultArea";
-import GamePreview from "../GamePreview/GamePreview";
 import { playSound } from "@/helpers/sound";
 import Coinflip from "../Coinflip/Coinflip";
 import styles from "./Cups.module.css";
@@ -28,28 +27,27 @@ const Cups: React.FC = () => {
     isShow: false,
     win: false,
   });
+
   const [cups, setCups] = useState<number[]>(shuffle([1, 2, 3]));
-  const [random, setRandom] = useState(pickRandom([1, 2, 3]));
+  const [random, setRandom] = useState<number>(pickRandom([1, 2, 3]));
   const [selectedCupId, setSelectedCupId] = useState<number | null>(random);
   const [showInitialStart, setShowInitialStart] = useState<boolean>(true);
   const [showWinOverlay, setShowWinOverlay] = useState<boolean>(false);
+
   const shuffleAudioRef = useRef<HTMLAudioElement | null>(null);
   const applaudAudioRef = useRef<HTMLAudioElement | null>(null);
   const winAudioRef = useRef<HTMLAudioElement | null>(null);
   const loseAudioRef = useRef<HTMLAudioElement | null>(null);
-  const [randomCoin, setRandomCoin] = useState<"head" | "tails" | "none">(
-    "head"
-  );
 
+  const [randomCoin, setRandomCoin] = useState<"head" | "tail">("head");
   const [showCoin, setShowCoin] = useState<boolean | null>(null);
-
   const [isWin, setIsWin] = useState<boolean | null>(null);
   const [state, setState] = useState<"waiting" | "flip-animation" | "winner">(
     "waiting"
   );
 
   const handleGameStart = () => {
-    const result: "head" | "tails" = Math.random() < 0.5 ? "head" : "tails";
+    const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
     setRandomCoin(result);
   };
 
@@ -63,15 +61,14 @@ const Cups: React.FC = () => {
         playSound("win");
         setShuffling(false);
         setResultState({ isShow: true, win: true });
-        setShowWinOverlay(isWin);
+        setShowWinOverlay(true);
         setShowCoin(true);
       }, 4500);
     } else {
       setTimeout(() => {
-        if (isWin == false) {
+        if (isWin === false) {
           setShowCoin(false);
           playSound("lose");
-
           setResultState({ isShow: true, win: false });
         }
       }, 4500);
@@ -88,18 +85,12 @@ const Cups: React.FC = () => {
   }, []);
 
   const stopSounds = useCallback(() => {
-    if (applaudAudioRef.current) {
-      applaudAudioRef.current.pause();
-      applaudAudioRef.current.currentTime = 0;
-    }
-    if (winAudioRef.current) {
-      winAudioRef.current.pause();
-      winAudioRef.current.currentTime = 0;
-    }
-    if (loseAudioRef.current) {
-      loseAudioRef.current.pause();
-      loseAudioRef.current.currentTime = 0;
-    }
+    [applaudAudioRef, winAudioRef, loseAudioRef].forEach((ref) => {
+      if (ref.current) {
+        ref.current.pause();
+        ref.current.currentTime = 0;
+      }
+    });
   }, []);
 
   const handleCloseWinOverlay = useCallback(() => {
@@ -112,41 +103,30 @@ const Cups: React.FC = () => {
   return (
     <div className={styles.appContainer}>
       <h1 className={styles.title}>FLIP COIN TO WIN A PRIZE!</h1>
+
       <div
         className="max-w-[300px] w-full m-auto"
         style={{
           maxWidth: "400px",
           height: "200px",
           width: "100%",
-          margin: "0px auto 50px",
+          margin: "-70px auto 50px",
           position: "relative",
         }}
       >
- 
         <div
           style={{
             pointerEvents: isWin === false || isWin === null ? "auto" : "none",
           }}
           onClick={handleGameStart}
         >
- 
-          {showCoin == false ? (
+          {showCoin === false ? (
             <div>
-              {" "}
-              <img
-                className="tailCoin"
-                src={tail_coin.src}
-                alt="tail_coin"
-              />{" "}
+              <img className="tailCoin" src={tail_coin.src} alt="tail coin" />
             </div>
-          ) : showCoin == true ? (
+          ) : showCoin === true ? (
             <div>
-              {" "}
-              <img
-                className="tailCoin"
-                src={head_coin.src}
-                alt="head_coin"
-              />{" "}
+              <img className="tailCoin" src={head_coin.src} alt="head coin" />
             </div>
           ) : (
             <Coinflip
@@ -158,8 +138,7 @@ const Cups: React.FC = () => {
           )}
         </div>
       </div>
-      {/* </div>
-      </div> */}
+
       <div style={{ textAlign: "center" }}>
         <ResultArea
           showInitialStart={showInitialStart}
