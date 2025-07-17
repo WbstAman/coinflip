@@ -49,7 +49,7 @@ const Cups: React.FC = () => {
   );
 
   const handleGameStart = () => {
-    const result: "head" | "tails" = Math.random() < 0.5 ? "head" : "tails";   
+    const result: "head" | "tails" = Math.random() < 0.5 ? "head" : "tails";
     setRandomCoin(result);
   };
 
@@ -68,13 +68,11 @@ const Cups: React.FC = () => {
       }, 4500);
     } else {
       setTimeout(() => {
-
         if (isWin == false) {
           setShowCoin(false);
-        playSound("lose");
+          playSound("lose");
 
-        setResultState({ isShow: true, win: false });
-
+          setResultState({ isShow: true, win: false });
         }
       }, 4500);
     }
@@ -124,21 +122,14 @@ const Cups: React.FC = () => {
           position: "relative",
         }}
       >
-        {/* <GamePreview isWin={isWin} setIsWin={setIsWin} /> */}
-
+ 
         <div
           style={{
             pointerEvents: isWin === false || isWin === null ? "auto" : "none",
           }}
           onClick={handleGameStart}
         >
-          {/* <Coinflip
-            state={state}
-            setState={setState}
-            randomCoin={randomCoin}
-            setIsWin={setIsWin}
-          /> */}
-
+ 
           {showCoin == false ? (
             <div>
               {" "}
@@ -159,10 +150,10 @@ const Cups: React.FC = () => {
             </div>
           ) : (
             <Coinflip
-              state={state}
               setState={setState}
               randomCoin={randomCoin}
               setIsWin={setIsWin}
+              state={state}
             />
           )}
         </div>
