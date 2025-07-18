@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import headSprite from "../../assets/Images/head.webp";
-import tailSprite from "../../assets/Images/tail.webp";
 import "./coinflip.css";
 
 // 🔧 SpriteProps uses required types now
@@ -63,6 +61,9 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
     };
   }, [state]);
 
+const pageWidth = window.innerWidth;
+console.log('pageWidth', pageWidth)
+
 
    return (
     <div
@@ -73,7 +74,7 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
         backgroundImage: `url(${sprite})`,
         backgroundPosition: `${x}px ${y}px`,
         backgroundSize: `${frameWidth * totalCols}px ${frameHeight * totalRows}px`,
-          transform: `scale(1.8)`
+          transform: `scale(${pageWidth>576 ? 1.8 : pageWidth>400 ? 1.4 : 1 })`
 
           
       }}
