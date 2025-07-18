@@ -10,6 +10,7 @@ import head_coin from "../../assets/Images/head_coin.png";
 import tail_coin from "../../assets/Images/tail_coin.png";
 import headSprite from "../../assets/Images/head.webp";
 import tailSprite from "../../assets/Images/tail.webp";
+import { motion } from "motion/react"
 
 interface ResultState {
   isShow: boolean;
@@ -34,11 +35,13 @@ const Cups: React.FC = () => {
   const [isWin, setIsWin] = useState<boolean | null>(null);
   const [state, setState] = useState<"waiting" | "flip-animation" | "winner">("waiting");
   const [spriteImage, setSpriteImage] = useState(headSprite.src)
+  const [image, setImage] = useState(headSprite.src)
  
   useEffect(() => {
       const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
       setRandomCoin(result);
       setSpriteImage( result === "head" ? headSprite.src : tailSprite.src)
+      setImage( result === "head" ? head_coin.src : tail_coin.src)
   }, [])
   
 
@@ -48,6 +51,9 @@ const Cups: React.FC = () => {
     }
 
     if (isWin) {
+
+      // setImage(head_coin.src)
+ 
       setTimeout(() => {
         playSound("win");
         setShuffling(false);
@@ -100,7 +106,7 @@ const Cups: React.FC = () => {
             pointerEvents: isWin === false || isWin === null ? "auto" : "none",
           }}
          >
-          {showCoin === false ? (
+          {/* {showCoin === false ? (
             <div>
               <img className="tailCoin" src={tail_coin.src} alt="tail coin" />
             </div>
@@ -116,8 +122,49 @@ const Cups: React.FC = () => {
               state={state}
               spriteImage={spriteImage}
             />
-          )}
-   
+          )} */}
+                 {/* {showCoin === false ? (
+            <div>
+              <img className="tailCoin" src={image} alt="tail coin" />
+            </div>
+          ) : showCoin === true ? (
+            <div>
+              <img className="tailCoin" src={image} alt="head coin" />
+            </div>
+          ) : (
+            <Coinflip
+              setState={setState}
+              randomCoin={randomCoin}
+              setIsWin={setIsWin}
+              state={state}
+              spriteImage={spriteImage}
+            />
+          )} */}
+
+
+            {showCoin !== null ? (
+       
+
+            <motion.img
+  key={image}
+  initial={{ opacity: 0, scale: 0.9 }}
+  animate={{ opacity: 1, scale: 1 }}
+  exit={{ opacity: 0, scale: 1.05 }}
+  transition={{ duration: 0.5 }}
+  className="tailCoin"
+  src={image}
+  alt="coin"
+/>
+        
+          ) : (
+            <Coinflip
+              setState={setState}
+              randomCoin={randomCoin}
+              setIsWin={setIsWin}
+              state={state}
+              spriteImage={spriteImage}
+            />
+          )} 
    
         </div>
       </div>
