@@ -74,9 +74,7 @@ console.log('pageWidth', pageWidth)
         backgroundImage: `url(${sprite})`,
         backgroundPosition: `${x}px ${y}px`,
         backgroundSize: `${frameWidth * totalCols}px ${frameHeight * totalRows}px`,
-          transform: `scale(${pageWidth>576 ? 1.8 : pageWidth>400 ? 1.4 : 1 })`
-
-          
+        transform: `scale(${pageWidth>576 ? 1.8 : pageWidth>400 ? 1.4 : 1 })`
       }}
     />
   );

@@ -84,6 +84,7 @@ const Cups: React.FC = () => {
  
   return (
     <div className={styles.appContainer}>
+    {/* <div className="flex flex-col items-center w-full h-screen overflow-hidden"> */}
       <h1 className={styles.title}>FLIP COIN TO WIN A PRIZE!</h1>
 
       <div
