@@ -54,7 +54,7 @@ const Cups: React.FC = () => {
         setResultState({ isShow: true, win: true });
         setShowWinOverlay(true);
         setShowCoin(true);
-      }, 4500);
+      }, 4000);
     } else {
       setTimeout(() => {
         if (isWin === false) {
@@ -62,7 +62,7 @@ const Cups: React.FC = () => {
           playSound("lose");
           setResultState({ isShow: true, win: false });
         }
-      }, 4500);
+      }, 4000);
     }
   }, [isWin]);
 
