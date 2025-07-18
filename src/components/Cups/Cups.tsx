@@ -17,7 +17,6 @@ interface ResultState {
 }
 
 const Cups: React.FC = () => {
-  const [showCupTransform, setShowCupTransform] = useState<boolean>(true);
   const [shuffling, setShuffling] = useState<boolean>(true);
   const [resultState, setResultState] = useState<ResultState>({
     isShow: false,

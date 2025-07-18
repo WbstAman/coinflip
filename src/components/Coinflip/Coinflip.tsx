@@ -67,8 +67,6 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
    setPageWidth( window.innerWidth)
   }, []);
 
-
-
    return (
     <div
       className="sprite"
@@ -93,9 +91,6 @@ interface CoinflipProps {
 }
 
 const Coinflip: React.FC<CoinflipProps> = ({ state, setState, randomCoin, setIsWin,spriteImage }) => {
-
- 
- 
   return (
     <div className="main-wrapper" onClick={() => setState("flip-animation")}>
       <Sprite
