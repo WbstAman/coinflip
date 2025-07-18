@@ -10,6 +10,10 @@ import styles from "./Cups.module.css";
 import head_coin from "../../assets/Images/head_coin.png";
 import tail_coin from "../../assets/Images/tail_coin.png";
 
+import headSprite from "../../assets/Images/head.webp";
+import tailSprite from "../../assets/Images/tail.webp";
+
+
 const shuffleSound = "/assets/audio/card-shuffling.mp3";
 const applaudSound = "/assets/audio/applaud.mp3";
 const winSound = "/assets/audio/win.mp3";
@@ -42,14 +46,23 @@ const Cups: React.FC = () => {
   const [randomCoin, setRandomCoin] = useState<"head" | "tail">("head");
   const [showCoin, setShowCoin] = useState<boolean | null>(null);
   const [isWin, setIsWin] = useState<boolean | null>(null);
-  const [state, setState] = useState<"waiting" | "flip-animation" | "winner">(
-    "waiting"
-  );
+  const [state, setState] = useState<"waiting" | "flip-animation" | "winner">("waiting");
 
-  const handleGameStart = () => {
-    const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
-    setRandomCoin(result);
-  };
+  const [spriteImage, setSpriteImage] = useState(headSprite.src)
+
+  // const handleGameStart = () => {
+  //   const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
+  //   const result='tail'
+  //   const result='head'
+  //   setRandomCoin(result);
+  // };
+
+  useEffect(() => {
+        const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
+      setRandomCoin(result);
+      setSpriteImage( result === "head" ? headSprite.src : tailSprite.src)
+  }, [])
+  
 
   useEffect(() => {
     if (isWin != null) {
@@ -110,7 +123,7 @@ const Cups: React.FC = () => {
           maxWidth: "400px",
           height: "200px",
           width: "100%",
-          margin: "-70px auto 50px",
+          margin: "-70px auto 70px",
           position: "relative",
         }}
       >
@@ -118,7 +131,7 @@ const Cups: React.FC = () => {
           style={{
             pointerEvents: isWin === false || isWin === null ? "auto" : "none",
           }}
-          onClick={handleGameStart}
+          // onClick={handleGameStart}
         >
           {showCoin === false ? (
             <div>
@@ -134,8 +147,10 @@ const Cups: React.FC = () => {
               randomCoin={randomCoin}
               setIsWin={setIsWin}
               state={state}
+              spriteImage={spriteImage}
             />
           )}
+   
         </div>
       </div>
 

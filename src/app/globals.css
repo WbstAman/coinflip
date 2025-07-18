@@ -40,6 +40,7 @@ h1 {
     margin: auto;
     top: 0;
     bottom: -54px;
-    width: 140px;
+    /* width: 140px; */
+    width: 250px;
 
 }

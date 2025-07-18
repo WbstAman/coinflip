@@ -16,7 +16,6 @@ interface SpriteProps {
 
 const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, setIsWin }) => {
   const [frame, setFrame] = useState<number>(0);
-
   const totalCols = 10;
   const totalRows = 11;
   const totalFrames = totalCols * totalRows;
@@ -27,8 +26,7 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
 
   const startAnimation = () => {
     if (intervalRef.current) return;
-
-    // ✅ Use setState safely now that it's required
+ 
     if (randomCoin === "head") {
       setState("winner");
       setIsWin(true);
@@ -65,7 +63,8 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
     };
   }, [state]);
 
-  return (
+
+   return (
     <div
       className="sprite"
       style={{
@@ -74,6 +73,9 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
         backgroundImage: `url(${sprite})`,
         backgroundPosition: `${x}px ${y}px`,
         backgroundSize: `${frameWidth * totalCols}px ${frameHeight * totalRows}px`,
+          transform: `scale(1.8)`
+
+          
       }}
     />
   );
@@ -84,11 +86,13 @@ interface CoinflipProps {
   setIsWin: (state: true | false | null) => void;
   randomCoin: "head" | "tail";
   state: "waiting" | "flip-animation" | "winner";
+  spriteImage: string;
 }
 
-const Coinflip: React.FC<CoinflipProps> = ({ state, setState, randomCoin, setIsWin }) => {
-  const spriteImage = randomCoin === "head" ? headSprite.src : tailSprite.src;
+const Coinflip: React.FC<CoinflipProps> = ({ state, setState, randomCoin, setIsWin,spriteImage }) => {
 
+ 
+ 
   return (
     <div className="main-wrapper" onClick={() => setState("flip-animation")}>
       <Sprite
