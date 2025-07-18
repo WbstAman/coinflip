@@ -37,7 +37,7 @@ const Cups: React.FC = () => {
   const [spriteImage, setSpriteImage] = useState(headSprite.src)
  
   useEffect(() => {
-        const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
+      const result: "head" | "tail" = Math.random() < 0.5 ? "head" : "tail";
       setRandomCoin(result);
       setSpriteImage( result === "head" ? headSprite.src : tailSprite.src)
   }, [])
@@ -84,7 +84,6 @@ const Cups: React.FC = () => {
  
   return (
     <div className={styles.appContainer}>
-    {/* <div className="flex flex-col items-center w-full h-screen overflow-hidden"> */}
       <h1 className={styles.title}>FLIP COIN TO WIN A PRIZE!</h1>
 
       <div
@@ -95,7 +94,6 @@ const Cups: React.FC = () => {
           width: "100%",
           margin: "-70px auto 70px",
           position: "relative",
-          zIndex:99
         }}
       >
         <div
@@ -120,6 +118,7 @@ const Cups: React.FC = () => {
               spriteImage={spriteImage}
             />
           )}
+   
    
         </div>
       </div>

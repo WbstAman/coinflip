@@ -49,6 +49,8 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
   const x = -(frame % totalCols) * frameWidth;
   const y = -Math.floor(frame / totalCols) * frameHeight;
 
+  const [pageWidth, setPageWidth] = useState(0)
+
   useEffect(() => {
     if (state === "waiting") return;
     startAnimation();
@@ -61,8 +63,10 @@ const Sprite: React.FC<SpriteProps> = ({ sprite, setState, state, randomCoin, se
     };
   }, [state]);
 
-const pageWidth = window.innerWidth;
-console.log('pageWidth', pageWidth)
+  useEffect(() => {
+   setPageWidth( window.innerWidth)
+  }, []);
+
 
 
    return (
